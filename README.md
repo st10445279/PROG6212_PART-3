@@ -1,10 +1,9 @@
 # PROG6212_PART-3
 PART 3_ASSIGNMENTS
-## Roles & Permissions
+## Technology Stack
 
-| Role              | Key Functions                                                                 |
-|-------------------|-------------------------------------------------------------------------------|
-| **Lecturer**      | Submit claims, upload supporting documents, view personal claim history       |
-| **Coordinator**   | Review & approve/reject submitted claims, add remarks                         |
-| **Academic Manager** | Final approval/rejection of coordinator-approved claims, view reports      |
-| **HR Personnel**  | View fully approved claims, mark as paid, manage lecturers, generate payroll reports |
+- ASP.NET Core 9.0 MVC  
+- Entity Framework Core (Code-First)  
+- SQL Server (LocalDB or full instance)  
+- ASP.NET Core Identity (Individual Accounts)  
+- Bootstrap 5 + custom CSS + vanilla JavaScript
