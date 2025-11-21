@@ -1,10 +1,10 @@
 # PROG6212_PART-3
 PART 3_ASSIGNMENTS
-## Features Overview
+## Roles & Permissions
 
-- Multi-level approval workflow  
-- Role-based access control (Lecturer → Coordinator → Academic Manager → HR)  
-- Secure file uploads with validation  
-- Real-time claim status tracking  
-- Auto-calculation of claim totals  
-- Detailed dashboards and reports per role
+| Role              | Key Functions                                                                 |
+|-------------------|-------------------------------------------------------------------------------|
+| **Lecturer**      | Submit claims, upload supporting documents, view personal claim history       |
+| **Coordinator**   | Review & approve/reject submitted claims, add remarks                         |
+| **Academic Manager** | Final approval/rejection of coordinator-approved claims, view reports      |
+| **HR Personnel**  | View fully approved claims, mark as paid, manage lecturers, generate payroll reports |
