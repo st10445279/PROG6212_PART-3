@@ -1,0 +1,39 @@
+﻿@model List<ApplicationUser>
+@{
+    ViewData["Title"] = "Lecturer Management";
+}
+
+<div class="card">
+    <h2><i class="fas fa-users"></i> Lecturer Management</h2>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Created Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lecturer in Model)
+                    {
+                        <tr>
+                            <td>@lecturer.FirstName @lecturer.LastName</td>
+                            <td>@lecturer.Email</td>
+                            <td>@lecturer.CreatedDate.ToString("yyyy-MM-dd")</td>
+                            <td><span class="badge badge-approved">Active</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="no-data">No lecturers found.</p>
+    }
+</div>

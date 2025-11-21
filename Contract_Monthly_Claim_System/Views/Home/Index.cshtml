@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Contract Monthly Claim System</h1>
+        <p class="hero-subtitle">Streamline your claim submission and approval process</p>
+
+        @if (!User.Identity!.IsAuthenticated)
+        {
+            <div class="hero-buttons">
+                <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Login</a>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-secondary">Register</a>
+            </div>
+        }
+        else
+        {
+            <div class="hero-buttons">
+                @if (User.IsInRole("Lecturer"))
+                {
+                    <a asp-controller="Lecturer" asp-action="Dashboard" class="btn btn-primary">Go to Dashboard</a>
+                }
+                else if (User.IsInRole("Coordinator"))
+                {
+                    <a asp-controller="Coordinator" asp-action="Dashboard" class="btn btn-primary">Go to Dashboard</a>
+                }
+                else if (User.IsInRole("AcademicManager"))
+                {
+                    <a asp-controller="AcademicManager" asp-action="Dashboard" class="btn btn-primary">Go to Dashboard</a>
+                }
+                else if (User.IsInRole("HR"))
+                {
+                    <a asp-controller="HR" asp-action="Dashboard" class="btn btn-primary">Go to Dashboard</a>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<div class="features-section">
+    <h2>Key Features</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <i class="fas fa-file-upload feature-icon"></i>
+            <h3>Easy Claim Submission</h3>
+            <p>Lecturers can quickly submit claims with supporting documents</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-check-circle feature-icon"></i>
+            <h3>Automated Approval</h3>
+            <p>Coordinators and managers can efficiently review and approve claims</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-chart-line feature-icon"></i>
+            <h3>Real-time Tracking</h3>
+            <p>Track claim status from submission to payment</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-file-export feature-icon"></i>
+            <h3>Export Reports</h3>
+            <p>Generate Excel and PDF reports for approved claims</p>
+        </div>
+    </div>
+</div>

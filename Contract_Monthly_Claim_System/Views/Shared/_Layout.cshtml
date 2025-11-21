@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Contract_Monthly_Claim_System</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Contract_Monthly_Claim_System.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-file-invoice-dollar"></i> CMCS
+                </a>
+                <div class="navbar-menu">
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Lecturer"))
+                        {
+                            <a asp-controller="Lecturer" asp-action="Dashboard">Dashboard</a>
+                            <a asp-controller="Lecturer" asp-action="SubmitClaim">Submit Claim</a>
+                        }
+                        else if (User.IsInRole("Coordinator"))
+                        {
+                            <a asp-controller="Coordinator" asp-action="Dashboard">Dashboard</a>
+                            <a asp-controller="Coordinator" asp-action="PendingClaims">Pending Claims</a>
+                            <a asp-controller="Coordinator" asp-action="AllClaims">All Claims</a>
+                        }
+                        else if (User.IsInRole("AcademicManager"))
+                        {
+                            <a asp-controller="AcademicManager" asp-action="Dashboard">Dashboard</a>
+                            <a asp-controller="AcademicManager" asp-action="AllClaims">All Claims</a>
+                        }
+                        else if (User.IsInRole("HR"))
+                        {
+                            <a asp-controller="HR" asp-action="Dashboard">Dashboard</a>
+                            <a asp-controller="HR" asp-action="ApprovedClaims">Approved Claims</a>
+                            <a asp-controller="HR" asp-action="LecturerManagement">Lecturers</a>
+                        }
+
+                        <form asp-controller="Account" asp-action="Logout" method="post" class="logout-form">
+                            <button type="submit" class="btn-logout">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Login">Login</a>
+                        <a asp-controller="Account" asp-action="Register">Register</a>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container main-content">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-error">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 - Contract Monthly Claim System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

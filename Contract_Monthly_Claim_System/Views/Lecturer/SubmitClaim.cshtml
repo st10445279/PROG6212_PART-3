@@ -1,0 +1,55 @@
+﻿@model SubmitClaimViewModel
+@{
+    ViewData["Title"] = "Submit Claim";
+}
+
+<div class="card">
+    <h2><i class="fas fa-file-upload"></i> Submit New Claim</h2>
+
+    <form asp-action="SubmitClaim" method="post" enctype="multipart/form-data" id="claimForm">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="HoursWorked"></label>
+            <input asp-for="HoursWorked" class="form-control" type="number" step="0.01" id="hoursWorked" />
+            <span asp-validation-for="HoursWorked" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="HourlyRate"></label>
+            <input asp-for="HourlyRate" class="form-control" type="number" step="0.01" id="hourlyRate" />
+            <span asp-validation-for="HourlyRate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Total Amount (Auto-calculated)</label>
+            <input type="text" class="form-control" id="totalAmount" readonly value="R 0.00" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Notes"></label>
+            <textarea asp-for="Notes" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Documents"></label>
+            <input asp-for="Documents" class="form-control" type="file" multiple accept=".pdf,.doc,.docx,.xlsx" />
+            <small class="form-text">Accepted formats: PDF, DOC, DOCX, XLSX (Max 5MB per file)</small>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check"></i> Submit Claim
+            </button>
+            <a asp-action="Dashboard" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/claim-calculator.js"></script>
+}

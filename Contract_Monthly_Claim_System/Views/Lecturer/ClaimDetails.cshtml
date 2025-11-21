@@ -1,0 +1,77 @@
+﻿@model Claim
+@{
+    ViewData["Title"] = "Claim Details";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2><i class="fas fa-file-alt"></i> Claim #@Model.ClaimId Details</h2>
+        <span class="badge badge-@Model.Status.ToLower()">@Model.Status</span>
+    </div>
+
+    <div class="details-grid">
+        <div class="detail-item">
+            <strong>Hours Worked:</strong>
+            <span>@Model.HoursWorked</span>
+        </div>
+        <div class="detail-item">
+            <strong>Hourly Rate:</strong>
+            <span>@Model.HourlyRate.ToString("N2")</span>
+        </div>
+        <div class="detail-item">
+            <strong>Total Amount:</strong>
+            <span>@Model.TotalAmount.ToString("N2")</span>
+        </div>
+        <div class="detail-item">
+            <strong>Submitted Date:</strong>
+            <span>@Model.SubmittedDate.ToString("yyyy-MM-dd HH:mm")</span>
+        </div>
+
+        @if (Model.ApprovedDate.HasValue)
+        {
+            <div class="detail-item">
+                <strong>Approved Date:</strong>
+                <span>@Model.ApprovedDate.Value.ToString("yyyy-MM-dd HH:mm")</span>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.Notes))
+        {
+            <div class="detail-item full-width">
+                <strong>Notes:</strong>
+                <p>@Model.Notes</p>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.RejectionReason))
+        {
+            <div class="detail-item full-width alert-error">
+                <strong>Rejection Reason:</strong>
+                <p>@Model.RejectionReason</p>
+            </div>
+        }
+    </div>
+
+    @if (Model.Documents.Any())
+    {
+        <h3>Supporting Documents</h3>
+        <div class="documents-list">
+            @foreach (var doc in Model.Documents)
+            {
+                <div class="document-item">
+                    <i class="fas fa-file"></i>
+                    <span>@doc.FileName</span>
+                    <a asp-action="DownloadDocument" asp-route-id="@doc.DocumentId" class="btn btn-sm btn-info">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="form-actions">
+        <a asp-action="Dashboard" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>

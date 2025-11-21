@@ -1,0 +1,80 @@
+﻿@model List<Claim>
+@{
+    ViewData["Title"] = "Lecturer Dashboard";
+}
+
+<div class="dashboard-header">
+    <h1><i class="fas fa-chalkboard-teacher"></i> Welcome, @ViewBag.UserName</h1>
+    <a asp-action="SubmitClaim" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Submit New Claim
+    </a>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <i class="fas fa-file-invoice stat-icon"></i>
+        <div>
+            <h3>@ViewBag.TotalClaims</h3>
+            <p>Total Claims</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <i class="fas fa-clock stat-icon pending"></i>
+        <div>
+            <h3>@ViewBag.PendingClaims</h3>
+            <p>Pending</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <i class="fas fa-check-circle stat-icon approved"></i>
+        <div>
+            <h3>@ViewBag.ApprovedClaims</h3>
+            <p>Approved</p>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>My Claims</h2>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Claim ID</th>
+                        <th>Hours Worked</th>
+                        <th>Hourly Rate</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                        <th>Submitted Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var claim in Model)
+                    {
+                        <tr>
+                            <td>#@claim.ClaimId</td>
+                            <td>@claim.HoursWorked</td>
+                            <td>@claim.HourlyRate.ToString("N2")</td>
+                            <td>@claim.TotalAmount.ToString("N2")</td>
+                            <td><span class="badge badge-@claim.Status.ToLower()">@claim.Status</span></td>
+                            <td>@claim.SubmittedDate.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                <a asp-action="ClaimDetails" asp-route-id="@claim.ClaimId" class="btn btn-sm btn-info">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="no-data">No claims submitted yet.</p>
+    }
+</div>
