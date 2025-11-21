@@ -1,5 +1,10 @@
 # PROG6212_PART-3
 PART 3_ASSIGNMENTS
-# Contract Monthly Claim System (CMCS)
+## Features Overview
 
-A comprehensive ASP.NET Core MVC web application (.NET 9.0) that streamlines the submission, verification, approval, and payment of monthly claims for independent/contract lecturers.
+- Multi-level approval workflow  
+- Role-based access control (Lecturer → Coordinator → Academic Manager → HR)  
+- Secure file uploads with validation  
+- Real-time claim status tracking  
+- Auto-calculation of claim totals  
+- Detailed dashboards and reports per role
